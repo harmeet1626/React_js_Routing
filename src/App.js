@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { Link } from 'react-router-dom';
+import Routers from './routes/index'
+import StateContext from './components/context'
+import { useState } from 'react';
 
 function App() {
+
+  const [state, setState] = useState("text from context");
+
+  const updateState = (newState) => {
+    setState(newState);
+  };
   return (
+    <StateContext.Provider value={{ state, updateState }}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <header className="App-header">
+          <Link to={"/"}>Home</Link>||
+          <Link to={"/about"}>about</Link>
+        </header>
+        <Routers ></Routers>
     </div>
+    </StateContext.Provider>
   );
 }
 
